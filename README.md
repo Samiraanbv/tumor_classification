@@ -1,76 +1,46 @@
-# Tumor_MRI_Data_Classification
+
+# MRI Data Classification
 # MRI Data Classification - Brain Tumor Detection
+This project focuses on classifying MRI (Magnetic Resonance Imaging) data into different categories, specifically without tumor, and with tumor types such as glioma, meningioma, and pituitary. The dataset used for this classification task is obtained from Kaggle, available at https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri.
 
-This repository contains code and resources for classifying MRI (Magnetic Resonance Imaging) data for brain tumor detection. The goal of the project is to accurately classify MRI images into two classes: images with tumors and images without tumors. The tumor types considered in this classification are glioma, meningioma, and pituitary tumors.
+## Methodology
+To solve this problem, transfer learning using EfficientNet is employed. The weights of the EfficientNet model are set to be trainable, allowing the model to adapt and learn from the MRI dataset. The implementation is done using the PyTorch framework, leveraging its powerful deep learning capabilities.
 
-## Dataset
+## Data Preprocessing
+To ensure robustness and prevent overfitting, several transformations are applied to the training dataset. These transformations include:
 
-The dataset used in this project is sourced from Kaggle and can be found at [Kaggle Brain Tumor MRI Dataset](https://www.kaggle.com/masoudnickparvar/brain-tumor-mri). The dataset contains MRI images of the brain, both with and without tumors, along with corresponding labels indicating the presence and type of tumor in each image.
+- Resize: The images are resized to a specific dimension suitable for the EfficientNet model.
+- Random Flip: Images are randomly flipped horizontally or vertically to introduce variation and aid in generalization.
+- Gaussian Blur: A Gaussian blur is applied to the images, which can help reduce noise and improve overall image quality.
+These transformations are carefully designed to be independent of the evaluation data to prevent any data leakage and maintain the integrity of the model's performance assessment.
 
-Please download the dataset from the provided Kaggle link and place it in the appropriate location within the project directory structure.
+## Model Training
+The training process involves optimizing the model's weights using the Adam optimizer. The model is trained for 20 epochs with a learning rate of 0.0001. This configuration ensures an adequate number of iterations while controlling the step size for gradient updates during training.
 
-## Project Structure
+## Evaluation Metrics
+The performance of the classification model is evaluated using two key metrics:
 
-The repository is organized as follows:
+Accuracy: The accuracy metric measures the proportion of correctly classified MRI images in the test dataset.
+Loss: The loss metric represents the discrepancy between the predicted and true labels, aiming to minimize the error during training.
+Results
+After training the model using the described methodology, the achieved results are as follows:
 
-```
-.
-├── data
-│   ├── train
-│   │   ├── glioma
-│   │   ├── meningioma
-│   │   └── pituitary
-│   └── test
-├── models
-│   ├── efficientnet.py
-│   └── utils.py
-├── utils
-│   ├── data_preprocessing.py
-│   └── evaluation.py
-├── README.md
-└── main.py
-```
-
-- The `data` directory contains the training and testing data for the classification task. The training data is further divided into subdirectories based on the tumor types: `glioma`, `meningioma`, and `pituitary`. The `test` directory contains the MRI images for testing.
-
-- The `models` directory contains the implementation of EfficientNet architecture in `efficientnet.py` and utility functions in `utils.py`.
-
-- The `utils` directory provides utility scripts such as `data_preprocessing.py` for preprocessing the data and `evaluation.py` for evaluating the performance of the trained models.
-
-- The `README.md` file (this file) provides an overview of the project, dataset information, and instructions for usage.
-
-- The `main.py` file serves as the entry point for running the classification pipeline. You can modify this file to experiment with different hyperparameters or configurations.
+Accuracy: Approximately 99.5% accuracy on the test dataset, indicating the model's ability to classify MRI images correctly.
+Loss: Less than 0.02 loss, demonstrating a minimal discrepancy between the predicted and true labels.
+These results highlight the effectiveness of transfer learning with EfficientNet and the success of the chosen configuration in accurately classifying MRI images into different tumor categories.
 
 ## Getting Started
+To replicate and build upon this work, follow these steps:
 
-To get started with this project, please follow these steps:
-
-1. Clone this repository to your local machine using the following command:
-   ```
-   git clone <repository_url>
-   ```
-
-2. Download the dataset from the [Kaggle Brain Tumor MRI Dataset](https://www.kaggle.com/masoudnickparvar/brain-tumor-mri) and place it in the `data` directory.
-
-3. Install the required dependencies by running the following command:
-   ```
-   pip install -r requirements.txt
-   ```
-
-4. Modify and run the `main.py` script to train and evaluate the EfficientNet model on the brain tumor classification task. Adjust the hyperparameters as needed and experiment with different configurations.
-
-## Results
-
-The trained EfficientNet model achieves remarkable accuracy of more than 99% and a low loss of less than 0.02 on the brain tumor classification task.
-
-## Contributing
-
-Contributions to this project are welcome. If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
+Clone the repository: git clone https://github.com/your-username/repository-name.git
+Download the MRI dataset from https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri and place it in the appropriate data directory.
+Set up the required dependencies, including PyTorch and other necessary packages.
+Modify the dataset path and other hyperparameters in the code, if necessary.
+Run the training script and monitor the progress and performance of the model.
+Evaluate the trained model using the test dataset and analyze the results.
+Feel free to customize and experiment with the code to further enhance the classification performance or adapt it to other similar problems.
 
 ## Acknowledgments
+We acknowledge the contribution of the Kaggle community and specifically the dataset provider, Masoud Nickparvar, for making the brain tumor MRI dataset publicly available. Their efforts enable the development of innovative solutions in medical image analysis and classification.
 
-We would like to acknowledge the original authors of the [Kaggle Brain Tumor MRI Dataset](https://www.kaggle.com/masoudnickparvar/brain-tumor-mri) for providing the dataset.
+
